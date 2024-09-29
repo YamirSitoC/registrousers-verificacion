@@ -1,0 +1,55 @@
+http://localhost/RegistroDeUsuarios/public/index.php
+
+
+¿Como guardar el token sin usar un campo en la bd?
+
+USANDO SESIONES
+Generas el token y lo guardas en una sesión.
+Verificas el token contra el valor en la sesión.
+
+Almacenar el token en la URL (sin base de datos)
+un token de verificación al usuario por correo o enlace, sin almacenarlo en ningún lugar del servidor. Esto significa que el token existe solo en el enlace enviado, 
+y una vez que el usuario lo utiliza, el token "se consume" y no se guarda en ningún lugar.
+
+
+-- OPCION
+
+Generas un token y lo almacenas en la sesión del servidor.
+Envías este token como parte de un enlace en la URL al correo del usuario.
+Cuando el usuario hace clic en el enlace, verificas que el token en la URL coincida con el token en la sesión.
+
+
+NOMBRE: Registro De Usuarios
+CONTRASEÑA DE APLICACION: h d h b a i w n v l g l i o n d
+                           
+
+
+Establecer un tiempo de expiración para el token.
+Implementar un sistema para reenviar el correo de verificación si el usuario lo solicita.
+Almacenar los tokens en una base de datos con tiempo de expiración si se necesita que sean válidos por más tiempo.
+
+
+// hacer 
+
+Implementación de la base de datos: Necesitarás implementar las funciones store_remember_token() y get_user_by_remember_token() 
+para manejar el almacenamiento y recuperación de tokens en tu base de datos.
+
+
+// error 
+
+se alamcena en la base de datos el token péro tambien en la sesion pero si se cierra el navegador antes de esto puede causar problemas antes
+de verificarse
+
+podria solucionarse= $_SESSION['verification_token'], en lugar de esto  buscarlo en la bd
+
+
+solucion: se estaba buscando el token en la sesión en lugar de la base de datos
+
+
+modificar verify: 
+    Buscar el token en la tabla, si se encuentra verifcar sino ha expirado
+    si el token es valido y no ha expirado:
+        actualiza el status del Usuario
+        eliminar el token de la tabla 
+
+    si el token ha expirado --> podra soliciar nuevo token

@@ -1,0 +1,16 @@
+{
+    "name": "registro/usuarios",
+    "autoload": {
+        "psr-4": {
+            "Registro\\Usuarios\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "4"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
